@@ -1,11 +1,10 @@
 const ticTacToe = (function() {
     const board = [];
-    const signatures = ["X", "O"];
-
     for (let i = 0; i < 9; i++) {
         board.push(" ");
     }
-
+    
+    const signatures = ["X", "O"];
     const turns = 9;
 
     const printBoard = () => {
