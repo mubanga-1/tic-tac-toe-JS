@@ -1,13 +1,13 @@
 const ticTacToe = (function() {
     const board = [];
     for (let i = 0; i < 9; i++) {
-        board.push(`${i}`);
+        board.push(" ");
     }
     const turns = 9;
 
     const printBoard = () => {
         for (let i = 0; i < 3; i++) {
-            console.log(board.slice(i * 3, (i + 1) * 3).join(" | "))
+            console.log("| " + board.slice(i * 3, (i + 1) * 3).join(" | ") + " |");
         }
     }
 
