@@ -158,7 +158,7 @@ function playGame() {
         ticTacToe.printBoard();
         console.log();
     
-    
+        // Switch between playerOne and playerTwo
         if (ticTacToe.turns % 2 == 0) {
             if (ticTacToe.makeMove(playerTwo, playerTwo.getMove())) {
                 ticTacToe.turns--;
@@ -172,7 +172,8 @@ function playGame() {
                 console.log("Invalid move");
             }
         }
-    
+
+        // Check if either player has won
         if (ticTacToe.winner()) {
             ticTacToe.printBoard();
             console.log();
