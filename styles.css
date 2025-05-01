@@ -9,19 +9,28 @@ body {
     position: relative;
 }
 
+.container, .board .box, .turns {
+    display: flex;
+}
+
+
 .container {
     position: absolute;
+    border: 1px solid black;
     top: 50px;
     left: 50%;
     transform: translate(-50%, 10%);
-    width: 500px;
+    width: 700px;
     height: 500px;
+}
+
+.board-wrapper {
+    width: 80%;
 }
 
 .turns {
     border: 1px solid black;
     height: 20%;
-    display: flex;
     justify-content: space-between;
     padding: 1.2rem;
 }
@@ -41,6 +50,26 @@ body {
 
 .board .box {
     border: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    font-size: 4rem;
     /* background-color: black; */
 }
 
+.functionality {
+    padding: 1.5rem;
+}
+
+.setting {
+    padding-left: .2rem;
+    padding-right: .2rem;
+    width: 12.5rem;
+    margin-top: 1.2rem; 
+    font-size: 1.5rem;
+}
+
+.winner {
+    text-align: center; 
+    margin-top: 3rem;   
+    font-size: 3rem; 
+}
