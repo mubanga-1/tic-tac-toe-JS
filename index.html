@@ -3,11 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
     <title>TicTacToe</title>
 </head>
 <body>
-    <div class="turns"></div>
-    <div class="board">
+    <div class="container">
+        <div class="board-wrapper">
+            <div class="turns">
+                <div id="player-x">X</div><div id="player-o">O</div>
+            </div>
+            <div class="board">
+            </div>
+        </div>
+        <div class="functionality">
+            <div class="settings">
+                <div class="btn-wrapper">
+                    <button class="setting" id="two-player">Human vs Human</button>
+                </div>
+                <div class="btn-wrapper">
+                    <button class="setting" id="one-player">Human vs Computer</button>
+                </div>
+                <div class="btn-wrapper">
+                    <button class="setting" id="clear-btn">Clear Board</button>
+                </div>
+            </div>
+            <div class="winner"></div>
+        </div>
     </div>
 </body>
 </html>
