@@ -30,13 +30,16 @@ body {
 
 .turns {
     border: 1px solid black;
-    height: 20%;
+    height: 25%;
     justify-content: space-between;
-    padding: 1.2rem;
+    align-items: center;
+    padding: 0rem 1rem 0rem 1rem;
 }
 
 .turns div {
-    font-size: 5rem;
+    font-size: 5rem;   
+    border-bottom: .25rem solid transparent;
+    transition: .7s ease;
 }
 
 
@@ -44,8 +47,7 @@ body {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
-    height: 80%;
-    /* gap: 10px; */
+    height: 75%;
 }
 
 .board .box {
@@ -53,7 +55,6 @@ body {
     justify-content: center;
     align-items: center;
     font-size: 4rem;
-    /* background-color: black; */
 }
 
 .functionality {
