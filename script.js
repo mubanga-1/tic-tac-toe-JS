@@ -8,6 +8,7 @@ const ticTacToe = (function() {
         board.push(" ");
     }
 
+    let againstHuman = false;
     const signatures = ["X", "O"];    
     let turns = 9;
 
@@ -113,11 +114,9 @@ const ticTacToe = (function() {
         }
     }
 
-    return {turns, signatures, generateBoard, makeMove, winner, availableMoves, resetBoard};
+    return {turns, againstHuman, signatures, generateBoard, makeMove, winner, availableMoves, resetBoard};
 })();
 
-
-// const input = require("prompt-sync")();
 
 // Creates a human player object when called
 function humanPlayer(letter) {
@@ -135,6 +134,19 @@ function humanPlayer(letter) {
 
     return {letter, getMove};
 }
+
+// Creates a computer player when called
+const randomComputerPlayer = function(letter) {
+    
+    // Genereates a move for computer to make via the length of the list of available moves
+    const getMove = () => {
+        const move = Math.ceil((Math.random() * ticTacToe.availableMoves().length) + 1); 
+        console.log(`${letter} makes move on ${move}`);
+        return move;
+    }
+    return {letter, getMove}
+};
+
 
 
 // setting buttons
@@ -154,19 +166,6 @@ function switchPlayerMarker(markerOne, markerTwo) {
     markerOne.style.borderBottom = secondStyling;
 }
 
-
-// // Creates a computer player when called
-// const randomComputerPlayer = function(letter) {
-    
-//     // Genereates a move for computer to make via the length of the list of available moves
-//     const getMove = () => {
-//         const move = Math.ceil((Math.random() * ticTacToe.availableMoves().length) + 1); 
-//         console.log(`${letter} makes move on ${move}`);
-//         return move;
-//     }
-//     return {letter, getMove}
-// };
-
 ticTacToe.generateBoard();
 
 // Changes the a button when give "h" as a flag and resets the color properties when give "r"
@@ -182,10 +181,12 @@ function modifyColor(button, flag) {
     }
 }
 
+// X and O for playHuman 
+const humanPlayerOne = humanPlayer("X");
+const humanPlayerTwo = humanPlayer("O");
+
 // Is called when the user wishes to player against another human
 function playHuman(event) {
-    const playerOne = humanPlayer("X");
-    const playerTwo = humanPlayer("O");
 
     const target = event.target;
 
@@ -193,16 +194,16 @@ function playHuman(event) {
     if (ticTacToe.turns % 2 == 0) {    
         switchPlayerMarker(playerOneMarker, playerTwoMarker);
 
-        if (ticTacToe.makeMove(playerTwo, playerTwo.getMove(target))) {
-            target.innerText = playerTwo.letter;
+        if (ticTacToe.makeMove(humanPlayerTwo, humanPlayerTwo.getMove(target))) {
+            target.innerText = humanPlayerTwo.letter;
             ticTacToe.turns--;
         } 
 
     } else {        
         switchPlayerMarker(playerOneMarker, playerTwoMarker);
 
-        if (ticTacToe.makeMove(playerOne, playerOne.getMove(target))) {
-            target.innerText = playerOne.letter;
+        if (ticTacToe.makeMove(humanPlayerOne, humanPlayerOne.getMove(target))) {
+            target.innerText = humanPlayerOne.letter;
             ticTacToe.turns--;
         }
     } 
@@ -210,7 +211,7 @@ function playHuman(event) {
     // Displays winner if there is one
     let isWinner = ticTacToe.winner();
     if (isWinner) {
-        winner.innerText = `${isWinner}'s wins!`;   
+        winner.innerText = `${isWinner} wins!`;   
         modifyColor(twoPlayerBtn, "r");
     } 
 
@@ -220,6 +221,15 @@ function playHuman(event) {
         modifyColor(twoPlayerBtn, "r");
     } 
 } 
+
+// Sets up the game for two human players when the twoPlayerBtn button is clicked 
+twoPlayerBtn.addEventListener("click", () => {
+    modifyColor(twoPlayerBtn, "h");
+    playerOneMarker.style.borderBottom = ".25rem solid green";
+    boardContainer.addEventListener("click", playHuman);
+});
+
+
 
 // Adds the functionality of completely resetting the game if the user clicks the clear board function
 clearBtn.addEventListener("click", () => {
@@ -235,15 +245,6 @@ clearBtn.addEventListener("click", () => {
     playerOneMarker.style.borderBottom = ".25rem solid transparent";
     playerTwoMarker.style.borderBottom = ".25rem solid transparent";
 
-
-    boardContainer.removeEventListener("click", playHuman);  
-});
-
-
-// Sets up the game for two human players when the twoPlayerBtn button is clicked 
-twoPlayerBtn.addEventListener("click", () => {
-    modifyColor(twoPlayerBtn, "h");
-    playerOneMarker.style.borderBottom = ".25rem solid green";
-    boardContainer.addEventListener("click", playHuman);
+    boardContainer.removeEventListener("click", playHuman);      
 });
 
